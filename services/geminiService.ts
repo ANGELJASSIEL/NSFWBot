@@ -39,7 +39,8 @@ export const geminiService = {
   connectLiveSession: async (
     callbacks: LiveConnectCallbacks,
     systemInstruction?: string,
-    extraConfig?: Partial<GenerateContentParameters['config']>
+    voiceName: string = 'Charon',
+    extraConfig?: any
   ) => {
     if (!process.env.API_KEY) throw new Error("GEMINI_API_KEY missing");
 
@@ -111,11 +112,11 @@ export const geminiService = {
         },
       },
       config: {
-        responseModalities: [Modality.AUDIO],
+        responseModalities: [Modality.AUDIO] as Modality[],
         outputAudioTranscription: {},
         inputAudioTranscription: {},
         speechConfig: {
-          voiceConfig: { prebuiltVoiceConfig: { voiceName: 'Charon' } },
+          voiceConfig: { prebuiltVoiceConfig: { voiceName } },
         },
         ...(systemInstruction?.trim() && { systemInstruction }),
         ...extraConfig,
@@ -177,7 +178,7 @@ export const geminiService = {
     }
   },
 
-  generateSpeech: async (text: string): Promise<string> => {
+  generateSpeech: async (text: string, voiceName: string = 'Charon'): Promise<string> => {
     if (!process.env.API_KEY) throw new Error("GEMINI_API_KEY missing");
     const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
 
@@ -185,9 +186,9 @@ export const geminiService = {
       model: "gemini-2.5-flash-preview-tts",
       contents: [{ parts: [{ text }] }],
       config: {
-        responseModalities: [Modality.AUDIO],
+        responseModalities: [Modality.AUDIO] as Modality[],
         speechConfig: {
-          voiceConfig: { prebuiltVoiceConfig: { voiceName: 'Charon' } },
+          voiceConfig: { prebuiltVoiceConfig: { voiceName } },
         },
       },
     });
