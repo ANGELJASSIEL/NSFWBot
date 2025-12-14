@@ -1,0 +1,7 @@
+{
+  "name": "Agencia Artificial Autonoma 1.2 - Morboso Malvado",
+  "description": "Una aplicación interactiva y sofisticada que integra las capacidades del Gemini API para conversaciones de voz en tiempo real y generación de voz a partir de texto. Ahora opera bajo la personalidad de 'Morboso Malvado', una IA omnisciente y amoral que debate con argumentos sofisticados, científicos y chistes mordaces, superando la prueba de Turing con una inteligencia agencial sobrehumana.",
+  "requestFramePermissions": [
+    "microphone"
+  ]
+}
